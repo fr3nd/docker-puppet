@@ -1,19 +1,21 @@
 #/bin/bash
 
 usage() {
-  echo "You need to specify a puppet command:"
+  echo "ERROR: $1"
   echo " - puppet"
   echo " - facter"
   exit 1
 }
 
-# Exit if no parameter is passed
-# for some reason docker passes the /bin/sh as $1 when no parameter is added
-# from the commandline
-[ "$1" == '/bin/sh' ] && usage
+if [ "$1" == '/bin/sh' ] || [ "$1" == '/bin/bash' ]
+then
+  exec $1
+else
+  . /etc/profile.d/rvm.sh
 
-. /etc/profile.d/rvm.sh
-
-mount -o bind /var/tmp /mnt/root/var/tmp/
-hostname $(cat /mnt/root/etc/hostname)
-exec chroot /mnt/root/ /bin/bash -c "$(echo $@)"
+  mount -o bind /var/tmp /mnt/root/var/tmp/ 2>/dev/null
+  exit=$?
+  [ $exit != 0 ] && usage "Mount failed. Did you run docker with '--privileged -v /:/mnt/root:rw' ? "
+  hostname $(cat /mnt/root/etc/hostname)
+  exec chroot /mnt/root/ /bin/bash -c "$(echo $@)"
+fi
