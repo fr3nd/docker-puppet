@@ -23,13 +23,23 @@ Some changes had to be done to allow it:
 Run puppet agent:
 
 ```
-docker run --privileged -v /:/mnt/root:rw -i -t --rm fr3nd/puppet puppet agent -t --noop
+docker run \
+  --privileged \
+  -v /:/mnt/root:rw \
+  -t \
+  fr3nd/puppet \
+  puppet agent -t --noop
 ```
 
 Run facter:
 
 ```
-docker run --privileged -v /:/mnt/root:rw -i -t --rm fr3nd/puppet facter -p
+docker run \
+  --privileged \
+  -v /:/mnt/root:rw \
+  -t \
+  fr3nd/puppet \
+  facter -p
 ```
 
 ## FAQ
