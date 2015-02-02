@@ -14,7 +14,9 @@ Some changes had to be done to allow it:
 1. Puppet and all its dependencies are installed in /var/tmp
 2. When the container is executed, you need to pass as volume the full
    filesystem of the parent host as read-write to /mnt/root
-3. When the container starts, it will bind mount /var/tmp to /mnt/root/var/tmp and it will chroot to /mnt/tmp so Puppet can be executed over the parent filesystem
+3. When the container starts, it will bind mount /var/tmp to /mnt/root/var/tmp
+   and it will chroot to /mnt/tmp so Puppet can be executed over the parent
+   filesystem
 
 ## How to use this image
 
