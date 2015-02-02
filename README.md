@@ -2,7 +2,7 @@
 
 ## Description
 
-Puppet into a container.
+Run puppet over the parent host from a container
 
 Running puppet into a container is easy, but having it to make changes over the
 parent host is another story.
