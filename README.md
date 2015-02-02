@@ -29,3 +29,9 @@ Run facter:
 ```
 docker run --privileged -v /:/mnt/root:rw -i -t --rm fr3nd/puppet facter -p
 ```
+
+## FAQ
+
+### Do you need to run the container as privileged?
+
+Yes. Otherwise there is no way to bind mount the root filesystem in read-write
