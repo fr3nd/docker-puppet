@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM debian:jessie
 MAINTAINER Carles Amigó, carles.amigo@socialpoint.es
 
 ENV PUPPET_VERSION 3.7.1
