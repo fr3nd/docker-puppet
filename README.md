@@ -1,10 +1,31 @@
 # Puppet agent docker image
 
-Docker image to run puppet agent and act over the parent host instead of the
-container
+## Description
 
-Run it like:
+Puppet into a container.
+
+Running puppet into a container is easy, but having it to make changes over the
+parent host is another story.
+
+This image allows you to run puppet and modify the parent host instead of
+modifying the files inside the own container.
+
+Some changes had to be done to allow it:
+1. Puppet and all its dependencies are installed in /var/tmp
+2. When the container is executed, you need to pass as volume the full
+   filesystem of the parent host as read-write to /mnt/root
+3. When the container starts, it will bind mount /var/tmp to /mnt/root/var/tmp and it will chroot to /mnt/tmp so Puppet can be executed over the parent filesystem
+
+## How to use this image
+
+Run puppet agent:
 
 ```
 docker run --privileged -v /:/mnt/root:rw -i -t --rm fr3nd/puppet puppet agent -t --noop
+```
+
+Run facter:
+
+```
+docker run --privileged -v /:/mnt/root:rw -i -t --rm fr3nd/puppet facter -p
 ```
