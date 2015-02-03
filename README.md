@@ -47,3 +47,10 @@ docker run \
 ### Do you need to run the container as privileged?
 
 Yes. Otherwise there is no way to bind mount the root filesystem in read-write
+
+
+### Does it work?
+
+Yes... and no. I could not compile ruby fully statically, so if you run it in
+a Debian based distro it will work. Otherwise, it will probably crash because
+it can't found some linked libraries.
